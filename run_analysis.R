@@ -1,16 +1,14 @@
-# input files:
+# Getting and Cleaning Data > Week 4 > Getting and Cleaning Data Course Project 
+# Using the UCI HAR Dataset (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 #
+# INPUT FILES:
 # subject_test/train = list of subjects performing in the test/training set.
-# X_test/train = summarised features of the measurements (each line has 561 summary values).  --not loaded
+# X_test/train = summarised features of the measurements. Each line has 561 summary values.
 # y_test/train = activity performed in test/training set.
-# body_acc_x_test/train = body acceleration in x-axis (128 samples per line)
-# body_acc_y_test/train = body acceleration in y-axis (128 samples per line)
-# body_acc_z_test/train = body acceleration in z-axis (128 samples per line)
-# body_gyro_x_test/train = body angular velocity in x-axis (128 samples per line)
-# body_gyro_y_test/train = body angular velocity in y-axis (128 samples per line)
-# body_gyro_z_test/train = body angular velocity in z-axis (128 samples per line)
-#
 # activity_labels = Activity codes.
+
+
+
 
 #load tidyverse library
 library(tidyverse)
@@ -26,54 +24,59 @@ actv_test <- read.csv("./UCI HAR Dataset/test/y_test.txt", header=FALSE, col.nam
 actv_train <- read.csv("./UCI HAR Dataset/train/y_train.txt", header=FALSE, col.names = "actID")
 activity_lbl <- read.csv("./UCI HAR Dataset/activity_labels.txt", header=FALSE, sep=" ", col.names = c("actID","activity"))
 
-#body acceleration - test
-# use function to read the result files
-body_acc_x_test <- read_data("./UCI HAR Dataset/test/Inertial Signals/body_acc_x_test.txt")
-body_acc_y_test <- read_data("./UCI HAR Dataset/test/Inertial Signals/body_acc_y_test.txt")
-body_acc_z_test <- read_data("./UCI HAR Dataset/test/Inertial Signals/body_acc_z_test.txt")
+#features
+x_test <- read_data("./UCI HAR Dataset/test/X_test.txt")
+x_train <- read_data("./UCI HAR Dataset/train/X_train.txt")
 
-#body acceleration - training
-body_acc_x_train <- read_data("./UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt")
-body_acc_y_train <- read_data("./UCI HAR Dataset/train/Inertial Signals/body_acc_y_train.txt")
-body_acc_z_train <- read_data("./UCI HAR Dataset/train/Inertial Signals/body_acc_z_train.txt")
+feature_heading <- read.csv("./UCI HAR Dataset/features.txt", header = FALSE, sep = " ")
 
-#body gyro - test
-body_gyro_x_test <- read_data("./UCI HAR Dataset/test/Inertial Signals/body_gyro_x_test.txt")
-body_gyro_y_test <- read_data("./UCI HAR Dataset/test/Inertial Signals/body_gyro_y_test.txt")
-body_gyro_z_test <- read_data("./UCI HAR Dataset/test/Inertial Signals/body_gyro_z_test.txt")
-
-#body gyro - training
-body_gyro_x_train <- read_data("./UCI HAR Dataset/train/Inertial Signals/body_gyro_x_train.txt")
-body_gyro_y_train <- read_data("./UCI HAR Dataset/train/Inertial Signals/body_gyro_y_train.txt")
-body_gyro_z_train <- read_data("./UCI HAR Dataset/train/Inertial Signals/body_gyro_z_train.txt")
+#drop the first column which is just the index
+feature_heading <- feature_heading[,2]
 
 #join test and training data sets
 subjects <- rbind(subjects_test, subjects_train)
 activity <- rbind(actv_test, actv_train)  
-body_acc_x <- rbind(body_acc_x_test, body_acc_x_train)
-body_acc_y <- rbind(body_acc_y_test, body_acc_y_train)
-body_acc_z <- rbind(body_acc_z_test, body_acc_z_train)
-body_gyro_x <- rbind(body_gyro_x_test, body_gyro_x_train)
-body_gyro_y <- rbind(body_gyro_y_test, body_gyro_y_train)
-body_gyro_z <- rbind(body_gyro_z_test, body_gyro_z_train)
+features <- rbind(x_test, x_train)
+
+#assign headings to the features df
+names(features) <- feature_heading
 
 
 # remove the individual data sets to save memory
 remove(subjects_test, subjects_train) 
 remove(actv_test, actv_train) 
-remove(body_acc_x_test, body_acc_x_train)
-remove(body_acc_y_test, body_acc_y_train)
-remove(body_acc_z_test, body_acc_z_train)
+remove(x_test, x_train)
 
 
+#find columns with std or mean
+useful_headings <- c(grep("-std()",feature_heading), grep("-mean()", feature_heading))
+
+#select the features with std/mean values
+useful_features <- features[,useful_headings]
+
+#merge the activity with its labels
+activity <- merge(activity, activity_lbl, by.x = "actID", by.y = "actID")
+activity <- activity[,2]
+
+#join the datasets together
+df <- cbind(subjects, activity, useful_features)
+
+#create summary dataframe with the mean of each measurement for each subject and activity.
+df_summary <- df %>% 
+  group_by(subjectID, activity) %>% 
+  summarise_all(mean)
+
+#output summary dtaframe
+write.table(df_summary, "df_summary.txt", row.names = FALSE)
+
+
+#--------------------------------------------------------------#
 #Define read_data function to read the measurement text files.
 #It takes the file name as parameter and returns the dataframe.
-
 read_data <- function(filename){
   file_lines <- readLines(filename)
-  result_df <- as.data.frame(matrix(nrow=0,ncol=128)) #empty results data frame
-
-    
+  result_df <- as.data.frame(matrix(nrow=0,ncol=561)) #empty results data frame
+  
   for(line in file_lines) {
     #trim then replace double space with single space
     line_clean <- gsub("  ", " ", str_trim(line))
@@ -91,14 +94,4 @@ read_data <- function(filename){
   #return results
   result_df
 }
-
-
-#filename <- "./UCI HAR Dataset/test/Inertial Signals/body_acc_x_test.txt"
-#line <- x[1]
-
-#the line becomes a 1x128 matrix
-#option1: transpose 128x1 and join to the rest of the data, then use pivot or gather
-
-#final dataframe columns
-#set, subjectID, activity, measurement, result 
 
