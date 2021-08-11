@@ -1,1 +1,86 @@
 Code book
+
+List of features/variables in the output file
+
+subjectID	            Subject ID
+activity	            Activity Performed
+tBodyAcc-std()-X	    Body Acceleration Std along X-axis in Time domain
+tBodyAcc-std()-Y	    Body Acceleration Std along Y-axis in Time domain
+tBodyAcc-std()-Z	    Body Acceleration Std along Z-axis in Time domain
+tGravityAcc-std()-X	  Gravity Acceleration Std along X-axis in Time domain
+tGravityAcc-std()-Y	  Gravity Acceleration Std along Y-axis in Time domain
+tGravityAcc-std()-Z	  Gravity Acceleration Std along Z-axis in Time domain
+tBodyAccJerk-std()-X	Body Jerk Std along X-axis in Time domain
+tBodyAccJerk-std()-Y	Body Jerk Std along Y-axis in Time domain
+tBodyAccJerk-std()-Z	Body Jerk Std along Z-axis in Time domain
+tBodyGyro-std()-X	    Body Angular rotation Std along X-axis in Time domain
+tBodyGyro-std()-Y	    Body Angular rotation Std along Y-axis in Time domain
+tBodyGyro-std()-Z	    Body Angular rotation Std along Z-axis in Time domain
+tBodyGyroJerk-std()-X	Body Angular rotation jerk Std along X-axis in Time domain
+tBodyGyroJerk-std()-Y	Body Angular rotation jerk Std along Y-axis in Time domain
+tBodyGyroJerk-std()-Z	Body Angular rotation jerk Std along Z-axis in Time domain
+tBodyAccMag-std()   	Body Acceleration Magnitude Std in Time domain
+tGravityAccMag-std()	Gravity Acceleration Magnitude Std in Time domain
+tBodyAccJerkMag-std()	Body Acceleration Jerk Magnitude Std in Time domain
+tBodyGyroMag-std()	  Body Angular rotation Magnitude Std in Time domain
+tBodyGyroJerkMag-std()	  Body Angular rotation Jerk Magnitude Std in Time domain
+fBodyAcc-std()-X	    Body Acceleration Std along X-axis in Frequency domain
+fBodyAcc-std()-Y	    Body Acceleration Std along Y-axis in Frequency domain
+fBodyAcc-std()-Z	    Body Acceleration Std along Z-axis in Frequency domain
+fBodyAccJerk-std()-X	Body Jerk Std along X-axis in Frequency domain
+fBodyAccJerk-std()-Y	Body Jerk Std along Y-axis in Frequency domain
+fBodyAccJerk-std()-Z	Body Jerk Std along Z-axis in Frequency domain
+fBodyGyro-std()-X	    Body Angular rotation Std along X-axis in Frequency domain
+fBodyGyro-std()-Y	    Body Angular rotation Std along Y-axis in Frequency domain
+fBodyGyro-std()-Z	    Body Angular rotation Std along Z-axis in Frequency domain
+fBodyAccMag-std()	    Body Acceleration Magnitude Std in Frequency domain
+fBodyBodyAccJerkMag-std()	  Body Acceleration Jerk Magnitude Std in Frequency domain
+fBodyBodyGyroMag-std()	    Body Angular rotation Magnitude Std in Frequency domain
+fBodyBodyGyroJerkMag-std()	Body Angular rotation Jerk Magnitude Std in Frequency domain
+tBodyAcc-mean()-X	    Body Acceleration Mean along X-axis in Time domain
+tBodyAcc-mean()-Y	    Body Acceleration Mean along Y-axis in Time domain
+tBodyAcc-mean()-Z	    Body Acceleration Mean along Z-axis in Time domain
+tGravityAcc-mean()-X	Gravity Acceleration Mean along X-axis in Time domain
+tGravityAcc-mean()-Y	Gravity Acceleration Mean along Y-axis in Time domain
+tGravityAcc-mean()-Z	Gravity Acceleration Mean along Z-axis in Time domain
+tBodyAccJerk-mean()-X	Body Jerk Mean along X-axis in Time domain
+tBodyAccJerk-mean()-Y	Body Jerk Mean along Y-axis in Time domain
+tBodyAccJerk-mean()-Z	Body Jerk Mean along Z-axis in Time domain
+tBodyGyro-mean()-X	  Body Angular rotation Mean along X-axis in Time domain
+tBodyGyro-mean()-Y	  Body Angular rotation Mean along Y-axis in Time domain
+tBodyGyro-mean()-Z	  Body Angular rotation Mean along Z-axis in Time domain
+tBodyGyroJerk-mean()-X	  Body Angular rotation jerk Mean along X-axis in Time domain
+tBodyGyroJerk-mean()-Y	  Body Angular rotation jerk Mean along Y-axis in Time domain
+tBodyGyroJerk-mean()-Z	  Body Angular rotation jerk Mean along Z-axis in Time domain
+tBodyAccMag-mean()	  Body Acceleration Magnitude Mean in Time domain
+tGravityAccMag-mean()	    Gravity Acceleration Magnitude Mean in Time domain
+tBodyAccJerkMag-mean()	  Body Acceleration Jerk Magnitude Mean in Time domain
+tBodyGyroMag-mean()	  Body Angular rotation Magnitude Mean in Time domain
+tBodyGyroJerkMag-mean()	  Body Angular rotation Jerk Magnitude Mean in Time domain
+fBodyAcc-mean()-X	    Body Acceleration Mean along X-axis in Frequency domain
+fBodyAcc-mean()-Y	    Body Acceleration Mean along Y-axis in Frequency domain
+fBodyAcc-mean()-Z	    Body Acceleration Mean along Z-axis in Frequency domain
+fBodyAcc-meanFreq()-X	Body Acceleration frequency Mean along X-axis in Frequency domain
+fBodyAcc-meanFreq()-Y	Body Acceleration frequency Mean along Y-axis in Frequency domain
+fBodyAcc-meanFreq()-Z	Body Acceleration frequency Mean along Z-axis in Frequency domain
+fBodyAccJerk-mean()-X	Body Acceleration Jerk Mean along X-axis in Frequency domain
+fBodyAccJerk-mean()-Y	Body Acceleration Jerk Mean along Y-axis in Frequency domain
+fBodyAccJerk-mean()-Z	Body Acceleration Jerk Mean along Z-axis in Frequency domain
+fBodyAccJerk-meanFreq()-X	  Body Acceleration Jerk frequency Mean along X-axis in Frequency domain
+fBodyAccJerk-meanFreq()-Y	  Body Acceleration Jerk frequency Mean along Y-axis in Frequency domain
+fBodyAccJerk-meanFreq()-Z 	Body Acceleration Jerk frequency Mean along Z-axis in Frequency domain
+fBodyGyro-mean()-X	  Body Angular rotation Mean along X-axis in Frequency domain
+fBodyGyro-mean()-Y	  Body Angular rotation Mean along Y-axis in Frequency domain
+fBodyGyro-mean()-Z	  Body Angular rotation Mean along Z-axis in Frequency domain
+fBodyGyro-meanFreq()-X	    Body Angular rotation frequency Mean along X-axis in Frequency domain
+fBodyGyro-meanFreq()-Y	    Body Angular rotation frequency Mean along Y-axis in Frequency domain
+fBodyGyro-meanFreq()-Z	    Body Angular rotation frequency Mean along Z-axis in Frequency domain
+fBodyAccMag-mean()	    Body Acceleration Magnitude Mean in Frequency domain
+fBodyAccMag-meanFreq()	Body Acceleration Magnitude frequency Mean in Frequency domain
+fBodyBodyAccJerkMag-mean()	    Body Acceleration Jerk Magnitude Mean in Frequency domain
+fBodyBodyAccJerkMag-meanFreq()	Body Acceleration Jerk frequency Mean in Frequency domain
+fBodyBodyGyroMag-mean()	        Body Angular rotation Magnitude Mean in Frequency domain
+fBodyBodyGyroMag-meanFreq()	    Body Angular rotation Magnitude frequency Mean in Frequency domain
+fBodyBodyGyroJerkMag-mean()	    Body Angular rotation Jerk Magnitude Mean in Frequency domain
+fBodyBodyGyroJerkMag-meanFreq() Body Angular rotation Jerk Magnitude frequency Mean in Frequency domain
+
